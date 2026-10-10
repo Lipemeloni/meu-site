@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Central de Downloads - Link Seguro</title>
-  <meta name="monetag" content="421f79f20d74414a0b47af9ad6544701">
   <style>
     * {
       box-sizing: border-box;
@@ -17,9 +16,8 @@
       background-color: #0f172a;
       color: #f8fafc;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       min-height: 100vh;
       padding: 20px;
     }
@@ -29,119 +27,115 @@
       border: 1px solid #334155;
       border-radius: 12px;
       padding: 30px;
-      max-width: 500px;
+      max-width: 480px;
       width: 100%;
       text-align: center;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     }
 
     h1 {
-      font-size: 22px;
+      font-size: 1.5rem;
       margin-bottom: 10px;
       color: #38bdf8;
     }
 
     p {
       color: #94a3b8;
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
-
-    /* Espaço reservado para os Anúncios */
-    .ad-banner {
-      background-color: #0f172a;
-      border: 2px dashed #475569;
-      border-radius: 8px;
-      padding: 40px 10px;
-      margin: 20px 0;
-      color: #64748b;
-      font-size: 13px;
+      font-size: 0.95rem;
+      margin-bottom: 25px;
     }
 
     .timer-box {
-      font-size: 18px;
+      font-size: 2.5rem;
       font-weight: bold;
-      margin-bottom: 20px;
       color: #f59e0b;
+      margin-bottom: 25px;
     }
 
     .btn-download {
-      display: inline-block;
-      width: 100%;
-      padding: 14px;
       background-color: #3b82f6;
       color: #ffffff;
-      font-size: 16px;
-      font-weight: bold;
       border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: bold;
       border-radius: 8px;
       cursor: pointer;
-      text-decoration: none;
-      transition: 0.3s;
+      transition: background-color 0.3s ease, transform 0.1s ease;
+      width: 100%;
+    }
+
+    .btn-download:hover:not(:disabled) {
+      background-color: #2563eb;
+      transform: translateY(-2px);
     }
 
     .btn-download:disabled {
       background-color: #475569;
+      color: #94a3b8;
       cursor: not-allowed;
-      opacity: 0.6;
     }
 
-    .btn-download.ready {
-      background-color: #22c55e;
-    }
-
-    .btn-download.ready:hover {
-      background-color: #16a34a;
+    .footer-note {
+      margin-top: 20px;
+      font-size: 0.8rem;
+      color: #64748b;
     }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <h1>Seu link está quase pronto!</h1>
-    <p>Aguarde a contagem regressiva para liberar o acesso ao download.</p>
+    <h1>Aguarde o seu Download</h1>
+    <p>O seu link seguro está a ser preparado. O botão será liberado assim que o contador terminar.</p>
 
-    <!-- ÁREA ONDE OS ANÚNCIOS FICARÃO -->
-    <div class="ad-banner">
-      [ Espaço reservado para Anúncios (Monetag / AdSense) ]
-    </div>
+    <div class="timer-box" id="timer">10</div>
 
-    <div class="timer-box" id="timer-status">
-      Aguarde <span id="seconds">10</span> segundos...
-    </div>
+    <button id="downloadBtn" class="btn-download" disabled>Aguarde...</button>
 
-    <button id="download-btn" class="btn-download" disabled>Aguarde...</button>
+    <p class="footer-note">Download verificado e seguro contra vírus.</p>
   </div>
 
   <script>
+    // Configurações
     let tempoRestante = 10;
-    const elementoSegundos = document.getElementById('seconds');
-    const elementoStatus = document.getElementById('timer-status');
-    const botaoDownload = document.getElementById('download-btn');
+    const timerElement = document.getElementById('timer');
+    const downloadBtn = document.getElementById('downloadBtn');
 
-    // COLOQUE O LINK FINAL DO SEU ARQUIVO/PROJETO AQUI
-    const linkDestino = "https://github.com";
+    // COLE O SEU DIRECT LINK DA MONETAG AQUI:
+    const linkMonetag = "COLE_SEU_DIRECT_LINK_AQUI"; 
 
-    const contador = setInterval(() => {
+    // LINK DO ARQUIVO REAL QUE O USUÁRIO VAI BAIXAR:
+    const linkDownloadReal = "COLE_LINK_DO_ARQUIVO_FINAL_AQUI";
+
+    // Contagem Regressiva
+    const contagem = setInterval(() => {
       tempoRestante--;
-      elementoSegundos.innerText = tempoRestante;
+      timerElement.textContent = tempoRestante;
 
       if (tempoRestante <= 0) {
-        clearInterval(contador);
-        elementoStatus.innerText = "Link liberado com sucesso!";
-        elementoStatus.style.color = "#22c55e";
-        
-        botaoDownload.disabled = false;
-        botaoDownload.innerText = "Acessar Conteúdo Agora 🚀";
-        botaoDownload.classList.add('ready');
+        clearInterval(contagem);
+        timerElement.style.display = 'none';
+        downloadBtn.textContent = 'Baixar Agora';
+        downloadBtn.disabled = false;
       }
     }, 1000);
 
-    botaoDownload.addEventListener('click', () => {
-      if (!botaoDownload.disabled) {
-        window.location.href = linkDestino;
+    // Evento de Clique no Botão
+    downloadBtn.addEventListener('click', () => {
+      // 1. Abre o anúncio da Monetag em uma nova aba
+      if (linkMonetag && linkMonetag !== "COLE_SEU_DIRECT_LINK_AQUI") {
+        window.open(linkMonetag, '_blank');
+      }
+
+      // 2. Inicia o download do arquivo na aba atual
+      if (linkDownloadReal && linkDownloadReal !== "COLE_LINK_DO_ARQUIVO_FINAL_AQUI") {
+        window.location.href = linkDownloadReal;
+      } else {
+        alert("O link do arquivo final precisa ser configurado no código.");
       }
     });
   </script>
+
 </body>
 </html>

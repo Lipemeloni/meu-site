@@ -102,10 +102,10 @@
     const timerElement = document.getElementById('timer');
     const accessBtn = document.getElementById('accessBtn');
 
-    // 1. COLE SEU DIRECT LINK DA MONETAG AQUI:
+    // 1. SEU DIRECT LINK DA MONETAG:
     const linkMonetag = "https://uplcm.com/4/12001809"; 
 
-    // 2. COLE O LINK DO SITE DESTINO AQUI (O SITE QUE O USUÁRIO QUER VER):
+    // 2. O SITE DE DESTINO:
     const linkDestino = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
 
     // Contagem Regressiva
@@ -124,16 +124,10 @@
     // Evento de Clique no Botão
     accessBtn.addEventListener('click', () => {
       // Abre o anúncio da Monetag em uma nova aba
-      if (linkMonetag && linkMonetag !== "https://uplcm.com/4/12001809") {
-        window.open(linkMonetag, '_blank');
-      }
+      window.open(linkMonetag, '_blank');
 
       // Abre o site de destino em outra nova aba
-      if (linkDestino && linkDestino !== "https://www.youtube.com/watch?v=dQw4w9WgXcQ") {
-        window.open(linkDestino, '_blank');
-      } else {
-        alert("Por favor, configure o linkDestino no código HTML.");
-      }
+      window.open(linkDestino, '_blank');
     });
   </script>
 

@@ -123,11 +123,11 @@
 
     // Evento de Clique no Botão
     accessBtn.addEventListener('click', () => {
-      // Abre o anúncio da Monetag em uma nova aba
+      // 1. Abre o anúncio da Monetag em uma nova aba
       window.open(linkMonetag, '_blank');
 
-      // Abre o site de destino em outra nova aba
-      window.open(linkDestino, '_blank');
+      // 2. Redireciona a aba atual para o site de destino (sem bloqueio de pop-up)
+      window.location.href = linkDestino;
     });
   </script>
 
